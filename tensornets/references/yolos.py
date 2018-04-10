@@ -189,6 +189,7 @@ def yolov2coco(x, is_training=False, scope=None, reuse=None):
         return get_v2_boxes(opts('yolov2'), *args, **kwargs)
     x = yolo(x, [1, 1, 3, 3, 5, 5], 425, is_training, scope, reuse)
     x.get_boxes = _get_boxes
+    x.loss = v2_loss(opts('yolov2'), x)
     return x
 
 
@@ -199,6 +200,7 @@ def yolov2voc(x, is_training=False, scope=None, reuse=None):
         return get_v2_boxes(opts('yolov2voc'), *args, **kwargs)
     x = yolo(x, [1, 1, 3, 3, 5, 5], 125, is_training, scope, reuse)
     x.get_boxes = _get_boxes
+    x.loss = v2_loss(opts('yolov2voc'), x)
     return x
 
 
